@@ -1,0 +1,18 @@
+<% unless Gem.win_platform? %>
+pid=<%= @server_config[:pidfile] %>
+foreground=<%= @server_config[:foreground] ? 'yes' : 'no' %>
+;chroot = /var/tmp/stunnel
+setuid = stunnel
+setgid = nogroup
+<% end %>
+client=no
+cert=<%= File.expand_path @server_config[:cert_file] %>
+sslVersion = SSLv2
+
+socket = l:TCP_NODELAY=1
+socket = r:TCP_NODELAY=1
+
+
+[RabbitMQ]
+accept  = 5673
+connect = 127.0.0.1:5672

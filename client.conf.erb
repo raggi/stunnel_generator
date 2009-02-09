@@ -1,0 +1,12 @@
+<% unless Gem.win_platform? %>
+pid=<%= @client_config[:pidfile] %>
+foreground=<%= @client_config[:foreground] ? 'yes' : 'no' %>
+<% end %>
+;setuid=nobody
+;setgid=nobody
+client=yes
+sslVersion = SSLv2
+
+[RabbitMQ]
+connect = <%= @config[:server_host] %>:5673
+accept  = 127.0.0.1:5672
